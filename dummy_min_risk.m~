@@ -1,0 +1,7 @@
+function omega = dummy_min_risk(esp, cov, max_budget)
+omega = zeros(size(esp));
+max = size(cov);
+min = ;
+for i 1:max
+    if cov(i,i) 
+    
