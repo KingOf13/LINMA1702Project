@@ -1,20 +1,21 @@
 %--------------------------------------------------------------%
-% 4.2 PARTIE 1 : Optimisation du rendement avec risque sous 
+% 4.2 PARTIE 2 : Optimisation du risque avec rendement sous 
 %                controle
 % 
 % Parametres : 
 % B    : scalaire representant le budget max
 % rho  : vecteur des rendements moyens esperes
 % C    : matrice de covariance
-% Vmax : scalaire representant la limite de la variance globale
+% Rmin : scalaire representant la limite du rendement attendu
 %--------------------------------------------------------------%
-function [omega, cvx_optval] = opti_rend_control (n, B, rho, C, Vmax)
+function [omega, cvx_optval] = opti_risq_control (n, B, rho, C, Rmin)
 cvx_begin
     variable omega(n, 1);
-    maximize(omega' * rho);
+    minimize( omega' * C * omega);
     subject to
-        sum(omega) <= B;
-        omega' * C * omega <= Vmax;
+        sum(omegh) >= 0;
+        sum(rho) <= B;
+        omega' * rho >= Rmin;
         omega >= 0;
 cvx_end
 end

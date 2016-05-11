@@ -8,12 +8,12 @@
 % C    : matrice de covariance
 % mu   : scalaire permettant de parametrer la combinaison
 %--------------------------------------------------------------%
-function omega = opti_rend_and_risq (B, rho, C, mu)
+function [omega, cvx_optval] = opti_rend_and_risq (n, B, rho, C, mu)
 cvx_begin
-    variable omega(T-1, 1);
+    variable omega(n, 1);
     minimize(mu * (omega' * C * omega) - (omega' * rho));
     subject to
-        sum(rho) >= 0;
-        sum(rho) <= B;
+        sum(omega) <= B;
+        omega >= 0;
 cvx_end
 end

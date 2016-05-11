@@ -1,0 +1,72 @@
+function main()
+B    = 100; % le budget
+%Cmax = B * 0.1;
+%Rmin = B * 0.1;
+%mu   = 1;
+H = csvread('BEL20.csv', 1, 2);
+
+delta = (H(2:end, :) - H(1:end-1, :)) ./ H(2:end, :);
+T = size(delta,1);
+n = size(delta,2);
+
+% vecteur rho (du rendement espere)
+rho = zeros(n, 1);
+for i = 1:n
+    rho(i) = sum(H(:,i)) ./ size(delta,1);
+end
+display(rho);
+
+% matrice C (de la covariance)
+C = zeros(n);
+for a = 1:n
+    for b = 1:n
+        C(a,b) = 1/T .* sum((H(:,a)-rho(a)) .* (H(:,b)-rho(b)));
+    end
+end
+display(C);
+
+
+
+% Opti du rendement avec controle du risque :
+Cmax = B .* 0:1:1;
+value1 = zeros(size(Cmax));
+omega1 = zeros(n, length(Cmax));
+for i = 1:length(Cmax)
+    [omega1(:, i), value1(i)] = opti_rend_control (n, B, rho, C, Cmax(i));
+end
+
+% Opti du risque avec controle du rendement :
+Rmin =  B .* 0:1:1;
+value2 = zeros(size(Rmin));
+omega2 = zeros(n, length(Rmin));
+for i = 1:length(Cmax)
+    [omega2(:, i), value2(i)] = opti_risq_control (n, B, rho, C, Rmin(i));
+end
+
+% Opti du risque avec controle du rendement :
+mu = exp(0:1:1);
+value3 = zeros(size(mu));
+omega3 = zeros(n, length(mu));
+for i = 1:length(mu)
+    [omega3(:, i), value3(i)] = opti_rend_and_risq (n, B, rho, C, mu(i));
+end 
+
+display(C);
+display(rho);
+
+figure;
+plot(Cmax, value1);
+title('Opti du rendement avec controle du risque');
+display(omega1);
+
+figure;
+plot(Rmin, -value2);
+title('Opti du risque avec controle du rendement');
+display(omega2);
+
+figure;
+plot(mu, -value3);
+title('Opti du risque avec controle du rendement');
+display(omega3);
+
+end
