@@ -1,0 +1,40 @@
+\documentclass[10pt,a4paper,draft]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[babel=true]{csquotes}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{lmodern}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+
+\author{Aigret Julien \texttt{(8343-13-00)}\and Gonzalez Alvarez Pablo \texttt{(5243-13-00)}\and Olewicki Doriane \texttt{(3964-14-00)}}
+\date{Mars-Avril 2016}
+\title{LSINF1252\\Rapport de projet :\\Optimisation d'un portefeuille financier}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section*{Préambule}
+\paragraph{} Ayant un budget total de $B$, nous posons $B \geq\ \Sigma_{i=1}^{n}\ \omega_i$, $\omega_i$ étant la somme totale allouée au produit $i$. Nous pouvons ainsi déterminer le vecteur suivant : $$\vec{\omega} = (\omega_1\ \omega_2\ \omega_3\ \cdots\ \omega_n)$$
+\paragraph{} Nous déterminons la matrice des covariances $C = (C_{i,j})_{i,j\in \overline{n}}$, où $C_{i,j} = C_{j,i}$ et $C_{i,j} = V_i$ si $i=j$.
+\paragraph{} Le rendement étant caractérisé par $R_i$, nous définissons le vecteur d'espérance $\vec{R}=(R_1\ R_2\ \cdots\ R_n)$.
+
+\section{Question 1 : Caractérisation des produits financiers}
+\paragraph{} Par produit financier, nous définissons deuxchoses :
+\begin{enumerate}
+\item Le budget alloué à ce produit;
+\item Le gain espéré (ou minimal) de ce produit, par rapport à l'investissement.
+\end{enumerate}
+Comme défini plus haut, nous construisons un vecteur $\vec{\omega}$ stockant les valeurs des investissements dans les produits financiers.
+Pour le gain, c'est un peu plus complexe. Mais grâce à la notion de variance et de covariance, nous pouvons définir une "zone" dans laquelle va se situer le rendement final.
+\end{document}

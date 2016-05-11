@@ -1,4 +1,4 @@
-function omega = dummy_max_rendement(esp, cov, max_budget)
-[val, i] = max(esp);
-omega = zero(size(esp));
+function omega = dummy_max_rendement(rho, cov, max_budget)
+[val, i] = max(rho);
+omega = zero(size(rho));
 omega(i)=max_budget;
