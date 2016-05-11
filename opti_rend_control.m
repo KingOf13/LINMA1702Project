@@ -15,6 +15,6 @@ cvx_begin
     subject to
         sum(rho) >= 0;
         sum(rho) <= B;
-        omega' * V <= Vmax;
+        omega' * C * omega <= Vmax;
 cvx_end
 end

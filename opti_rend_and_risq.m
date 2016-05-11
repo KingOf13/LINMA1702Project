@@ -11,7 +11,7 @@
 function omega = opti_rend_and_risq (B, rho, C, mu)
 cvx_begin
     variable omega(T-1, 1);
-    minimize(mu * (omega' * V) - (omega' * rho));
+    minimize(mu * (omega' * C * omega) - (omega' * rho));
     subject to
         sum(rho) >= 0;
         sum(rho) <= B;
