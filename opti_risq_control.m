@@ -8,10 +8,10 @@
 % C    : matrice de covariance
 % Rmin : scalaire representant la limite du rendement attendu
 %--------------------------------------------------------------%
-function omega = opti_risq_control (B, rho, c, Rmin)
+function omega = opti_risq_control (B, rho, C, Rmin)
 cvx_begin
     variable omega(T-1, 1);
-    minimize( omega' * V);
+    minimize( omega' * C * omega);
     subject to
         sum(rho) >= 0;
         sum(rho) <= B;
