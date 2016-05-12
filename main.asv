@@ -54,19 +54,19 @@ end
 display(C);
 display(rho);
 
-figure('Name','Opti du rendement avec controle du risque','NumberTitle','off')
+figure;
 plot(Cmax, value1);
 title('Opti du rendement avec controle du risque');
 display(omega1);
 
-figure('Name','Opti du risque avec controle du rendement','NumberTitle','off')
+figure;
 plot(Rmin, -value2);
 title('Opti du risque avec controle du rendement');
 display(omega2);
 
-figure('Name','Opti du risque avec controle du rendement et du risque','NumberTitle','off')
+figure;
 plot(mu, -value3);
-title('Opti du risque avec controle du rendement et du risque');
+title('Opti du risque avec controle du rendement et du risque²');
 display(omega3);
 
 end
