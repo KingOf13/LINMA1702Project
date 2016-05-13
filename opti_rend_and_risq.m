@@ -15,5 +15,6 @@ cvx_begin
     subject to
         sum(omega) <= 1;
         omega >= 0;
+        
 cvx_end
 end

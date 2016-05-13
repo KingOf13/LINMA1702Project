@@ -5,6 +5,7 @@ function main()
 H = csvread('BEL20.csv', 1, 2);
 p = 10; %nombre de pas
 
+
 delta = (H(2:end, :) - H(1:end-1, :)) ./ H(2:end, :);
 T = size(delta,1);
 n = size(delta,2);
@@ -51,6 +52,7 @@ end
 gain1 =  omega1'*rho;
 gain2 = omega2'*rho;
 gain3 = omega3'*rho;
+
 
 var1 = gain1;
 var2 = gain2;
