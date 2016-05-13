@@ -3,12 +3,12 @@
 %                du risque
 % 
 % Parametres : 
-% B    : scalaire representant le budget max
+
 % rho  : vecteur des rendements moyens esperes
 % C    : matrice de covariance
 % mu   : scalaire permettant de parametrer la combinaison
 %--------------------------------------------------------------%
-function [omega, cvx_optval] = opti_rend_and_risq (n, B, rho, C, mu)
+function [omega, cvx_optval] = opti_rend_and_risq (n, rho, C, mu)
 cvx_begin
     variable omega(n, 1);
     minimize(mu * (omega' * C * omega) - (omega' * rho));
