@@ -41,8 +41,8 @@ c2_grad = (1/B) * rho;
 z = zeros(size(c2_grad));
 
 
-syms lambda_1 lambda_2;
-S= solve(obj_grad + lambda_1*c1_grad + lambda_2*c2_grad == 0)
+lambda = [1 1];
+S= solve(obj_grad - lambda(1)*c1_grad - lambda(2)*c2_grad == 0)
 
 min = inf;
 min_ind = 0;omega_sol' * C * omega_sol
