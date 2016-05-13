@@ -13,7 +13,7 @@ cvx_begin
     variable omega(n, 1);
     minimize( omega' * C * omega);
     subject to
-        sum(omega) <= B;
+        sum(omega) == B;
         omega' * rho >= Rmin;
         omega >= 0;
 cvx_end

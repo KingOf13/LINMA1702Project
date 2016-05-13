@@ -1,0 +1,9 @@
+X = sym('x',[1 2])
+syms x1 x2
+A = [X; 1/2 -1/2]
+b = [1; 2]
+X.'
+S=solve(A*X.'==b)
+S.x1
+S.x1
+
