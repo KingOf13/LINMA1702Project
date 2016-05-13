@@ -6,4 +6,4 @@ S=solve(A*X.'==b);
 S.x1
 S.x2
 S(1)
-
+X

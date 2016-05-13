@@ -1,6 +1,8 @@
-B    = 100; % le budget
-ind = 1;
-Rmin = B * ind;
+function omega_sol = opti_full()
+
+B   = 1; % le budget
+ind =100;
+Rmin = B / ind;
 H = csvread('BEL20.csv', 1, 2);
 
 delta = (H(2:end, :) - H(1:end-1, :)) ./ H(2:end, :);
@@ -22,11 +24,70 @@ for a = 1:n
     end
 end
 %display(C);
+C=C/100;
+rho = rho/100;
 
-o=ones(1,n);
+omega = sym('omega',[n 1]);
 
-Cmod = [C;o;rho'];
-z=  zeros(n,1);
-z = [z; B;Rmin];
+obj = omega.' * C * omega;
+obj_grad = 2 * C * omega;
 
-omega = sym('omega',[1 n])
+c1 = B - sum(omega);
+c1_grad = (-1) * ones(size(omega));
+
+c2 = (1/B) * (omega.'*rho) - Rmin;
+c2_grad = (1/B) * rho;
+
+z = zeros(size(c2_grad));
+
+
+syms lambda_1 lambda_2;
+S= solve(obj_grad + lambda_1*c1_grad + lambda_2*c2_grad == 0)
+
+min = inf;
+min_ind = 0;omega_sol' * C * omega_sol
+
+omega_sol = [S.omega1 ; S.omega2 ; S.omega3 ; S.omega4 ; S.omega5 ; S.omega9 ...
+            ; S.omega10 ; S.omega11 ; S.omega12 ; S.omega13 ; S.omega14 ...
+            ; S.omega15 ; S.omega16 ; S.omega17 ; S.omega18 ; S.omega19 ...
+            ; S.omega20]
+
+for i=1:size(S.omega1,1)
+    omega_sol(:,i)
+    if (sum(omega_sol(:,i)) - B <= 0)
+        if (1/B * omega_sol(:,i)' * rho - Rmin >= 0)
+            if (omega_sol(:,i)' * C * omega_sol(:,i) < min)
+                min = omega_sol(:,i)' * C * omega_sol(:,i);
+                min_ind = i;
+            end
+        end
+    end
+end
+
+
+    
+
+
+if (0)
+display(S);
+display(S.omega1);
+display(S.omega2);
+display(S.omega3);
+display(S.omega4);
+display(S.omega5);
+display(S.omega6);
+display(S.omega7);
+display(S.omega8);
+display(S.omega9);
+display(S.omega10);
+display(S.omega11);
+display(S.omega12);
+display(S.omega13);
+display(S.omega14);
+display(S.omega15);
+display(S.omega16);
+display(S.omega17);
+display(S.omega18);
+display(S.omega19);
+display(S.omega20);
+end

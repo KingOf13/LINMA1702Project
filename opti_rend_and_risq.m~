@@ -13,8 +13,22 @@ cvx_begin
     variable omega(n, 1);
     minimize(mu * (omega' * C * omega) - (omega' * rho));
     subject to
-        sum(omega) <= 1;
+        sum(omega) == B;
         omega >= 0;
         
 cvx_end
+
+for c=0:1:100
+   cvx_begin
+    variable X(n);
+    minimise (c*(X'*C*X) - (X'*rho));
+    subject to
+    ones(1,20)*X ==1;
+    eye(20,20)*X >=zeros(20,1);
+   cvx_end
+   for j=1:20%construction de la matrice avec pour chaque ligne les premiers 20 colonnes sont occup�s par le vecteur minimisant et la 21eme colonne contient la valeur minimisante%
+        T(c+1,j)= X(j);
+        T(c+1,21)= (b*(X'*EC*X) - (X'*ER));
+    end
+end
 end
